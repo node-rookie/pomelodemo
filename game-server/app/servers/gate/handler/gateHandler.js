@@ -41,4 +41,10 @@ handler.queryEntry = function(msg, session, next) {
 		host: res.host,
 		port: res.clientPort
 	});
+
+	var routeParam = Math.floor(Math.random()*10);
+	this.app.rpc.time.timeRemote.getCurrentTime(routeParam, "aa", "bb",  function(hour, min, sec) {
+		// ...
+	});
 };
+

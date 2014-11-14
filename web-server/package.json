@@ -1,8 +1,11 @@
 {
-	"name": "chatofpomelo",
-	"version": "0.0.1",
-	"private": false,
-	"dependencies": {
-		"express": "3.4.0"
-	}
+  "name": "chatofpomelo",
+  "version": "0.0.1",
+  "private": false,
+  "dependencies": {
+    "bytes": "^1.0.0",
+    "express": "3.4.0",
+    "multiparty": "^4.0.0",
+    "qs": "^2.3.2"
+  }
 }

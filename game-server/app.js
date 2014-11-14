@@ -21,7 +21,8 @@ app.configure('production|development', 'gate', function(){
 	app.set('connectorConfig',
 		{
 			connector : pomelo.connectors.hybridconnector,
-			useProtobuf : true
+			useProtobuf : true,
+			useDict:true
 		});
 });
 
@@ -29,10 +30,24 @@ app.configure('production|development', 'gate', function(){
 app.configure('production|development', function() {
 	// route configures
 	app.route('chat', routeUtil.chat);
+	var router = function(routeParam, msg, context, cb) {
+		var timeServers = app.getServersByType('time');
+		console.log(timeServers.length)
+		var id = timeServers[routeParam % timeServers.length].id;
+		cb(null, id);
+	}
+
+	app.route('time', router);
 
 	// filter configures
 	app.filter(pomelo.timeout());
 });
+
+var abuseFilter = require('./app/servers/chat/filter/abuseFilter');
+app.configure('production|development', 'chat', function() {
+	app.filter(abuseFilter());
+})
+
 
 // start app
 app.start();
