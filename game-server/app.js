@@ -48,6 +48,14 @@ app.configure('production|development', 'chat', function() {
 	app.filter(abuseFilter());
 })
 
+var helloWorld = require('./app/components/HelloWorld');
+
+app.configure('production|development', 'master', function() {
+	app.load(helloWorld, {interval: 5000});
+});
+
+var timeReport = require('./app/modules/timeReport');
+app.registerAdmin(timeReport, {app: app});
 
 // start app
 app.start();
